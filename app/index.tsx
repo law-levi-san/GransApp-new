@@ -8,7 +8,7 @@ export default function SplashScreen() {
   useEffect(() => {
     const timer = setTimeout(() => {
       router.replace("/LoginScreen"); // Navigate to login screen
-    }, 3000);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, [router]);
@@ -16,10 +16,10 @@ export default function SplashScreen() {
   return (
     <View style={styles.container}>
       <Image
-        source={require("@/assets/images/grimmjow.jpg")}
+        source={require("@/assets/images/granslogo.jpg")}
         style={styles.logo}
       />
-      <Text style={styles.text}>Welcome to the App!</Text>
+      <Text style={styles.text}>GRANS INFOTECH</Text>
     </View>
   );
 }
