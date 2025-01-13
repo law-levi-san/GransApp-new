@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 
 export default function Login() {
@@ -10,6 +10,7 @@ export default function Login() {
   const handleLogin = () => {
     // Add login logic here
     alert("Login Successful");
+    router.push("/Query"); // Navigate to Query page
   };
 
   return (
@@ -35,15 +36,9 @@ export default function Login() {
       </TouchableOpacity>
       <TouchableOpacity
         style={[styles.button, styles.secondaryButton]}
-        onPress={() => router.push("/signup")}
+        onPress={() => router.push("/Query")}
       >
         <Text style={styles.secondaryButtonText}>Sign Up</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={[styles.button, styles.staffButton]}
-        onPress={() => router.push("/staff")}
-      >
-        <Text style={styles.staffButtonText}>Staff Login</Text>
       </TouchableOpacity>
     </View>
   );
@@ -73,10 +68,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     marginBottom: 15,
     fontSize: 16,
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
   },
   button: {
     width: "90%",
@@ -86,10 +77,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 10,
-    shadowColor: "#000",
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 3,
   },
   buttonText: {
     color: "#fff",
@@ -104,13 +91,5 @@ const styles = StyleSheet.create({
   secondaryButtonText: {
     color: "#333",
     fontSize: 16,
-  },
-  staffButton: {
-    backgroundColor: "#2196F3",
-  },
-  staffButtonText: {
-    color: "#fff",
-    fontSize: 18,
-    fontWeight: "bold",
   },
 });

@@ -11,7 +11,7 @@ export default function SignUp() {
   const handleSignUp = () => {
     // Add signup logic here
     alert("Sign Up Successful");
-    router.push("/");
+    router.push("/Query"); // Navigate to Query page
   };
 
   return (
@@ -45,78 +45,25 @@ export default function SignUp() {
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      padding: 20,
-      backgroundColor: "#eaf2f8", // Subtle blue-gray background
-    },
-    title: {
-      fontSize: 32,
-      fontWeight: "700",
-      color: "#2c3e50", // Deep blue for contrast
-      marginBottom: 40,
-      textAlign: "center",
-    },
-    input: {
-      width: "70%",
-      height: 50,
-      borderWidth: 1,
-      borderColor: "#bdc3c7",
-      backgroundColor: "#ffffff",
-      borderRadius: 10,
-      paddingHorizontal: 15,
-      marginBottom: 20,
-      fontSize: 16,
-      shadowColor: "#aaa",
-      shadowOpacity: 0.15,
-      shadowRadius: 5,
-      shadowOffset: { width: 0, height: 4 },
-      elevation: 3,
-    },
-    button: {
-      width: "90%",
-      height: 50,
-      backgroundColor: "#3498db", // Refined blue color
-      borderRadius: 10,
-      justifyContent: "center",
-      alignItems: "center",
-      marginBottom: 15,
-      shadowColor: "#2980b9",
-      shadowOpacity: 0.3,
-      shadowRadius: 5,
-      shadowOffset: { width: 0, height: 4 },
-      elevation: 4,
-    },
-    buttonText: {
-      color: "#ffffff",
-      fontSize: 18,
-      fontWeight: "600",
-    },
-    secondaryButton: {
-      backgroundColor: "#ecf0f1", // Light gray for secondary actions
-      borderWidth: 1,
-      borderColor: "#dcdde1",
-      shadowColor: "#bdc3c7",
-    },
-    secondaryButtonText: {
-      color: "#2c3e50",
-      fontSize: 16,
-      fontWeight: "500",
-    },
-    staffButton: {
-      backgroundColor: "#2ecc71", // Green for differentiation
-      shadowColor: "#27ae60",
-      shadowOpacity: 0.3,
-      shadowRadius: 5,
-      shadowOffset: { width: 0, height: 4 },
-      elevation: 4,
-    },
-    staffButtonText: {
-      color: "#ffffff",
-      fontSize: 18,
-      fontWeight: "600",
-    },
-  });
-  
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: "700",
+    marginBottom: 40,
+  },
+  input: {
+    width: "80%",
+    height: 50,
+    borderWidth: 1,
+    borderColor: "#ddd",
+    backgroundColor: "#fff",
+    borderRadius: 8,
+    paddingHorizontal: 15,
+    marginBottom: 15,
+  },
+});
