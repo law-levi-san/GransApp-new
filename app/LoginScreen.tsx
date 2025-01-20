@@ -15,7 +15,7 @@ export default function Login() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>AMC Customer Portal</Text>
+      <Text style={styles.title}>Customer Portal</Text>
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -33,12 +33,6 @@ export default function Login() {
       />
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={[styles.button, styles.secondaryButton]}
-        onPress={() => router.push("/Query")}
-      >
-        <Text style={styles.secondaryButtonText}>Sign Up</Text>
       </TouchableOpacity>
     </View>
   );
@@ -72,7 +66,7 @@ const styles = StyleSheet.create({
   button: {
     width: "90%",
     height: 50,
-    backgroundColor: "#4CAF50",
+    backgroundColor: "#2b0f73",
     borderRadius: 8,
     justifyContent: "center",
     alignItems: "center",
@@ -82,14 +76,5 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 18,
     fontWeight: "bold",
-  },
-  secondaryButton: {
-    backgroundColor: "#f5f5f5",
-    borderWidth: 1,
-    borderColor: "#ccc",
-  },
-  secondaryButtonText: {
-    color: "#333",
-    fontSize: 16,
   },
 });
