@@ -1,18 +1,23 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import { useRouter } from 'expo-router';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
+import { useRouter } from "expo-router";
 
 const SignupScreen: React.FC = () => {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const router = useRouter();
 
- const handleSignup = () => {
-    // Add your signup logic here
-    console.log('Signup:', { username, email, password });
+  const handleSignup = () => {
+    console.log("Signup:", { username, email, password });
     alert("Login Successful");
-    router.push("/staff"); 
+    router.push("/DisplayQueryStaff");
   };
 
   return (
@@ -49,7 +54,7 @@ const SignupScreen: React.FC = () => {
       </TouchableOpacity>
 
       <Text style={styles.infoText}>If an account already exists,</Text>
-      <TouchableOpacity onPress={() => router.push('/login')}>
+      <TouchableOpacity onPress={() => router.push("/StaffLogin")}>
         <Text style={styles.linkText}>Login</Text>
       </TouchableOpacity>
     </View>
@@ -59,47 +64,47 @@ const SignupScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f5f5f5',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#f5f5f5",
     padding: 20,
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 20,
-    color: '#333',
+    color: "#333",
   },
   input: {
-    width: '90%',
-    backgroundColor: '#fff',
+    width: "90%",
+    backgroundColor: "#fff",
     padding: 15,
     borderRadius: 10,
     marginVertical: 10,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderWidth: 1,
   },
   button: {
-    backgroundColor: '#007BFF',
+    backgroundColor: "#007BFF",
     padding: 15,
     borderRadius: 10,
     marginVertical: 20,
-    width: '90%',
-    alignItems: 'center',
+    width: "90%",
+    alignItems: "center",
   },
   buttonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   infoText: {
     fontSize: 16,
-    color: '#555',
+    color: "#555",
   },
   linkText: {
     fontSize: 16,
-    color: '#007BFF',
-    fontWeight: 'bold',
+    color: "#007BFF",
+    fontWeight: "bold",
     marginTop: 5,
   },
 });
