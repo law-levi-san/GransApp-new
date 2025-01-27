@@ -1,6 +1,6 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { useRouter } from 'expo-router';
+import React from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { useRouter } from "expo-router";
 
 const HomeScreen: React.FC = () => {
   const router = useRouter();
@@ -11,14 +11,14 @@ const HomeScreen: React.FC = () => {
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => router.push('/signup')}
+        onPress={() => router.push("/CustomerSignUp")}
       >
         <Text style={styles.buttonText}>Customer Login</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => router.push('/signin')}
+        onPress={() => router.push("/StaffSignUp")}
       >
         <Text style={styles.buttonText}>Staff Login</Text>
       </TouchableOpacity>
@@ -29,29 +29,29 @@ const HomeScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f5f5f5',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#f5f5f5",
     padding: 20,
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 30,
-    color: '#333',
+    color: "#333",
   },
   button: {
-    backgroundColor: '#2b0f73',
+    backgroundColor: "#2b0f73",
     padding: 15,
     borderRadius: 10,
     marginVertical: 10,
-    width: '80%',
-    alignItems: 'center',
+    width: "80%",
+    alignItems: "center",
   },
   buttonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
 });
 

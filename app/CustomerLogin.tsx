@@ -1,16 +1,45 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+} from "react-native";
 import { useRouter } from "expo-router";
+import axios from "axios";
 
 export default function Login() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    // Add login logic here
-    alert("Login Successful");
-    router.push("/Query"); // Navigate to Query page
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post(
+        "http://192.168.232.239:8000/api/emplogin",
+        {
+          email: email,
+          password: password,
+        }
+      );
+
+      if (response.status === 200) {
+        Alert.alert("Success", "Login successful");
+        const { token } = response.data;
+        console.log("Auth Token:", token);
+        router.push("/Query"); // Navigate to Query page
+      }
+    } catch (error: any) {
+      if (error.response && error.response.status === 401) {
+        Alert.alert("Error", "Invalid credentials. Please try again.");
+      } else if (error.response && error.response.status === 404) {
+        Alert.alert("Error", "Email doesn't exist. Kindly sign up.");
+      } else {
+        Alert.alert("Error", "Something went wrong. Please try later.");
+      }
+    }
   };
 
   return (
