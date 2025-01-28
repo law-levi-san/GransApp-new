@@ -9,26 +9,65 @@ import {
   ScrollView,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
+import axios from "axios";
+import { useRouter } from "expo-router";
 
-const Query: React.FC = () => {
+export default function PostQuery() {
+  const router = useRouter();
+  const [employeeId, setEmployeeId] = useState("");
   const [problemStatement, setProblemStatement] = useState("");
   const [description, setDescription] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = () => {
-    if (!problemStatement || !description || !name || !phone || !companyName || !email) {
-      Alert.alert("Error", "Please fill out all fields.");
+  const handleSubmit = async () => {
+    if (
+      !problemStatement ||
+      !description ||
+      !name ||
+      !phone ||
+      !companyName ||
+      !email
+    ) {
+      Alert.alert("Error", "All fields are required.");
       return;
     }
-    if (description.split(" ").length > 150) {
-      Alert.alert("Error", "Problem description exceeds 150 words.");
-      return;
+
+    setLoading(true);
+
+    try {
+      const response = await axios.get(
+        "http://192.168.116.239:8000/api/postQuery",
+        {
+          params: {
+            employee_id: employeeId,
+            problem_statement: problemStatement,
+            problem_description: description,
+            company_name: companyName,
+            phone_number: phone,
+            name: name,
+            email: email,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        Alert.alert("Success", "Registration successful!");
+        router.push("/Query");
+      }
+    } catch (error: any) {
+      console.error("Signup error:", error.response?.data || error.message);
+      Alert.alert(
+        "Error",
+        error.response?.data?.message ||
+          "Something went wrong. Please try again."
+      );
+    } finally {
+      setLoading(false);
     }
-    Alert.alert("Success", "Query submitted successfully!");
-    // Add your submission logic here
   };
 
   return (
@@ -43,9 +82,9 @@ const Query: React.FC = () => {
           onValueChange={(itemValue) => setProblemStatement(itemValue)}
         >
           <Picker.Item label="Select a problem" value="" />
-          <Picker.Item label="Technical Issue" value="technical" />
-          <Picker.Item label="Billing Issue" value="billing" />
-          <Picker.Item label="General Query" value="general" />
+          <Picker.Item label="Technical Issue" value="Technical Issue" />
+          <Picker.Item label="Billing Issue" value="Billing Issue" />
+          <Picker.Item label="General Query" value="General Query" />
         </Picker>
       </View>
 
@@ -99,13 +138,15 @@ const Query: React.FC = () => {
       />
 
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>Submit</Text>
+        {loading ? (
+          <Text style={styles.buttonText}>Submitting...</Text>
+        ) : (
+          <Text style={styles.buttonText}>Submit</Text>
+        )}
       </TouchableOpacity>
     </ScrollView>
   );
-};
-
-export default Query;
+}
 
 const styles = StyleSheet.create({
   container: {
