@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 2, // Shadow for Android
   },
-    infoText: {
+  infoText: {
     marginTop: 20,
     fontSize: 16,
     color: "#666", // Slightly muted color for secondary text
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   loginText: {
     marginTop: 5,
     fontSize: 16,
-    color: "#007AFF", // A more vibrant blue color for the link
+    color: "#2b0f73", // A more vibrant blue color for the link
     textDecorationLine: "underline",
     fontWeight: "500", // Slightly bolder text for emphasis
   },

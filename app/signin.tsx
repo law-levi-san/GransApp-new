@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   button: {
-    backgroundColor: '#007BFF',
+    backgroundColor: '#2b0f73',
     padding: 15,
     borderRadius: 10,
     marginVertical: 20,
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   },
   linkText: {
     fontSize: 16,
-    color: '#007BFF',
+    color: '#2b0f73',
     fontWeight: 'bold',
     marginTop: 5,
   },
