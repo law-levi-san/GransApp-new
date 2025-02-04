@@ -40,7 +40,7 @@ export default function PostQuery() {
 
     try {
       const response = await axios.get(
-        "http://192.168.116.239:8000/api/postQuery",
+        "http://192.168.9.239:8000/api/postQuery",
         {
           params: {
             employee_id: employeeId,

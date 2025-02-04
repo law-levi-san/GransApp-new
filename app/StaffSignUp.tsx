@@ -5,19 +5,57 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  Alert,
 } from "react-native";
 import { useRouter } from "expo-router";
+import axios from "axios";
 
-const SignupScreen: React.FC = () => {
-  const [username, setUsername] = useState("");
+export default function SignUp() {
+  const router = useRouter();
+  const [name, setname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
-  const handleSignup = () => {
-    console.log("Signup:", { username, email, password });
-    alert("Login Successful");
-    router.push("/DisplayQueryStaff");
+  const handleSignUp = async () => {
+    if (!name || !email || !password) {
+      Alert.alert("Error", "All fields are required.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const response = await axios.get(
+        "http://192.168.9.239:8000/api/staffsignup",
+        {
+          params: {
+            name,
+            email,
+            password,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        Alert.alert("Success", "Registration successful!");
+        console.log("Redirecting to /DisplayQueryStaff");
+        router.push("/DisplayQueryStaff");
+      }
+    } catch (error: any) {
+      console.error("Signup error:", error.response?.data || error.message);
+      Alert.alert(
+        "Error",
+        error.response?.data?.message ||
+          "Something went wrong. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const navigateToLogin = () => {
+    router.push("/StaffLogin");
   };
 
   return (
@@ -28,8 +66,8 @@ const SignupScreen: React.FC = () => {
         style={styles.input}
         placeholder="Username"
         placeholderTextColor="#aaa"
-        value={username}
-        onChangeText={setUsername}
+        value={name}
+        onChangeText={setname}
       />
       <TextInput
         style={styles.input}
@@ -49,7 +87,7 @@ const SignupScreen: React.FC = () => {
         secureTextEntry
       />
 
-      <TouchableOpacity style={styles.button} onPress={handleSignup}>
+      <TouchableOpacity style={styles.button} onPress={handleSignUp}>
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
 
@@ -59,7 +97,7 @@ const SignupScreen: React.FC = () => {
       </TouchableOpacity>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -109,4 +147,6 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignupScreen;
+function setLoading(arg0: boolean) {
+  throw new Error("Function not implemented.");
+}

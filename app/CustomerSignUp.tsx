@@ -28,7 +28,7 @@ export default function SignUp() {
 
     try {
       const response = await axios.get(
-        "http://192.168.116.239:8000/api/empsignup",
+        "http://192.168.9.239:8000/api/empsignup",
         {
           params: {
             name,

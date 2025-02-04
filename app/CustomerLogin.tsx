@@ -10,7 +10,7 @@ import {
 import { useRouter } from "expo-router";
 import axios from "axios";
 
-export default function Login() {
+export default function CustomerLogin() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,7 +18,7 @@ export default function Login() {
   const handleLogin = async () => {
     try {
       const response = await axios.post(
-        "http://192.168.116.239:8000/api/emplogin",
+        "http://192.168.9.239:8000/api/emplogin",
         {
           email: email,
           password: password,
@@ -29,7 +29,7 @@ export default function Login() {
         Alert.alert("Success", "Login successful");
         const { token } = response.data;
         console.log("Auth Token:", token);
-        router.push("/Query"); // Navigate to Query page
+        router.push("/DisplayQueryStaff"); // Navigate to Query page
       }
     } catch (error: any) {
       if (error.response && error.response.status === 401) {
