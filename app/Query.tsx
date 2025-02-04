@@ -41,7 +41,7 @@ export default function PostQuery() {
     try {
       const response = await axios.get(
         "http://192.168.0.62:8000/api/postQuery",
-        {
+         {
           params: {
             employee_id: employeeId,
             problem_statement: problemStatement,

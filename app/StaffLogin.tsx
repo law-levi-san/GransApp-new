@@ -1,6 +1,7 @@
 import axios from "axios";
-import { router } from "expo-router";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
+
 import {
   View,
   Text,
@@ -10,16 +11,18 @@ import {
   Alert,
 } from "react-native";
 
-const LoginScreen: React.FC = () => {
-  const [username, setUsername] = useState("");
+export default function StaffLogin() {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
     try {
       const response = await axios.post(
+
         "http://192.168.0.62:8000/api/stafflogin",
         {
-          email: username,
+          email: email,
           password: password,
         }
       );
@@ -48,10 +51,10 @@ const LoginScreen: React.FC = () => {
 
       <TextInput
         style={styles.input}
-        placeholder="Username"
+        placeholder="Email"
         placeholderTextColor="#aaa"
-        value={username}
-        onChangeText={setUsername}
+        value={email}
+        onChangeText={setEmail}
       />
       <TextInput
         style={styles.input}
@@ -67,7 +70,7 @@ const LoginScreen: React.FC = () => {
       </TouchableOpacity>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -106,5 +109,3 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
-
-export default LoginScreen;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Query;
+use App\Models\Employee;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
@@ -12,7 +13,6 @@ class QueryController extends Controller
 {
     public function postQuery(Request $request)
 {
-    Log::info('Problem statement: ' . $request->input('problem_statement'));
 
     $validator = Validator::make($request->all(), [
         'problem_statement' => 'required|in:Technical Issue,Billing Issue,General Query',
@@ -30,7 +30,10 @@ class QueryController extends Controller
         ], 400);
     }
 
+    $user = Employee::find($id);
+
     $query = Query::create([
+        'employee_id' => $user->id,
         'problem_statement' => $request->problem_statement,
         'description' => $request->description,
         'name' => $request->name,
