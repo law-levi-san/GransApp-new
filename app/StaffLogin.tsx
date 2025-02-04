@@ -1,4 +1,5 @@
-import { router } from "expo-router";
+import axios from "axios";
+import { router, useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
   View,
@@ -6,17 +7,39 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  Alert,
 } from "react-native";
 
-const LoginScreen: React.FC = () => {
-  const [username, setUsername] = useState("");
+export default function StaffLogin() {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    // Add your login logic here
-    console.log("Login:", { username, password });
-    alert("Login Successful");
-    router.push("/DisplayQueryStaff");
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post(
+        "http://192.168.9.239:8000/api/emplogin",
+        {
+          email: email,
+          password: password,
+        }
+      );
+
+      if (response.status === 200) {
+        Alert.alert("Success", "Login successful");
+        const { token } = response.data;
+        console.log("Auth Token:", token);
+        router.push("/DisplayQueryStaff"); // Navigate to Query page
+      }
+    } catch (error: any) {
+      if (error.response && error.response.status === 401) {
+        Alert.alert("Error", "Invalid credentials. Please try again.");
+      } else if (error.response && error.response.status === 404) {
+        Alert.alert("Error", "Email doesn't exist. Kindly sign up.");
+      } else {
+        Alert.alert("Error", "Something went wrong. Please try later.");
+      }
+    }
   };
 
   return (
@@ -25,10 +48,10 @@ const LoginScreen: React.FC = () => {
 
       <TextInput
         style={styles.input}
-        placeholder="Username"
+        placeholder="Email"
         placeholderTextColor="#aaa"
-        value={username}
-        onChangeText={setUsername}
+        value={email}
+        onChangeText={setEmail}
       />
       <TextInput
         style={styles.input}
@@ -44,7 +67,7 @@ const LoginScreen: React.FC = () => {
       </TouchableOpacity>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -83,5 +106,3 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
-
-export default LoginScreen;
