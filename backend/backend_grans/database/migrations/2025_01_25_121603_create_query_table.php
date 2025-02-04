@@ -11,8 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('query', function (Blueprint $table) {
-            $table->enum('problem_statement', ['Technical Issue', 'Billing Issue', 'General Query'])->change();
+        Schema::create('queries', function (Blueprint $table) {
+            $table->id();                                            
+            $table->enum('problem_statement', ['Technical Issue', 'Billing Issue', 'General Query']);
+            $table->string('description');
+            $table->string('name');
+            $table->string('email');
+            $table->bigInteger('phone_number');
+            $table->string('company_name');
+            $table->timestamps();
 
         });
     }
@@ -22,9 +29,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('query', function (Blueprint $table) {
-            $table->string('problem_statement')->change();
-
-        });    
+        Schema::dropIfExists('queries');
+   
     }
 };

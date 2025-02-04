@@ -1,3 +1,4 @@
+import axios from "axios";
 import { router } from "expo-router";
 import React, { useState } from "react";
 import {
@@ -6,18 +7,40 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  Alert,
 } from "react-native";
 
 const LoginScreen: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    // Add your login logic here
-    console.log("Login:", { username, password });
-    alert("Login Successful");
-    router.push("/DisplayQueryStaff");
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post(
+        "http://192.168.0.62:8000/api/stafflogin",
+        {
+          email: username,
+          password: password,
+        }
+      );
+
+      if (response.status === 200) {
+        Alert.alert("Success", "Login successful");
+        const { token } = response.data;
+        console.log("Auth Token:", token);
+        router.push("/DisplayQueryStaff"); // Navigate to Query page
+      }
+    } catch (error: any) {
+      if (error.response && error.response.status === 401) {
+        Alert.alert("Error", "Invalid credentials. Please try again.");
+      } else if (error.response && error.response.status === 404) {
+        Alert.alert("Error", "Email doesn't exist. Kindly sign up.");
+      } else {
+        Alert.alert("Error", "Something went wrong. Please try later.");
+      }
+    }
   };
+
 
   return (
     <View style={styles.container}>
@@ -70,11 +93,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   button: {
-<<<<<<< HEAD:app/login.tsx
-    backgroundColor: '#2b0f73',
-=======
     backgroundColor: "#007BFF",
->>>>>>> origin/main:app/StaffLogin.tsx
     padding: 15,
     borderRadius: 10,
     marginVertical: 20,

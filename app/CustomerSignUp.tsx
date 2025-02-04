@@ -28,7 +28,7 @@ export default function SignUp() {
 
     try {
       const response = await axios.get(
-        "http://192.168.116.239:8000/api/empsignup",
+        "http://192.168.0.62:8000/api/empsignup",
         {
           params: {
             name,
@@ -134,8 +134,6 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 2, // Shadow for Android
   },
-<<<<<<< HEAD:app/signup.tsx
-=======
   button: {
     width: "90%",
     height: 50,
@@ -150,7 +148,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
->>>>>>> origin/main:app/CustomerSignUp.tsx
+
   infoText: {
     marginTop: 20,
     fontSize: 16,

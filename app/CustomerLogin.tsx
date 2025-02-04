@@ -18,7 +18,7 @@ export default function Login() {
   const handleLogin = async () => {
     try {
       const response = await axios.post(
-        "http://192.168.116.239:8000/api/emplogin",
+        "http://192.168.0.62:8000/api/emplogin",
         {
           email: email,
           password: password,
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 10,
+    insetBlockEnd: 10,
   },
   buttonText: {
     color: "#fff",

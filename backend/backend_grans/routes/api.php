@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\QueryController;
+use App\Http\Controllers\StaffController;
 
 
 /*
@@ -25,5 +26,9 @@ Route::post('/emplogin', [AuthController::class, 'empLogin']);
 Route::get('/empsignup', [AuthController::class, 'empSignup']);
 
 Route::get('/postQuery', [QueryController::class, 'postQuery']);
+Route::post('/getQuery', [QueryController::class, 'getQuery']);
+
+Route::post('/stafflogin', [StaffController::class, 'staffLogin']);
+Route::get('/staffsignup', [StaffController::class, 'staffSignup']);
 
 

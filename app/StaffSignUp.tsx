@@ -5,18 +5,55 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  Alert,
 } from "react-native";
 import { useRouter } from "expo-router";
+import axios from "axios";
 
 const SignupScreen: React.FC = () => {
-  const [username, setUsername] = useState("");
+  const [name, setname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-  const handleSignup = () => {
-    console.log("Signup:", { username, email, password });
-    alert("Login Successful");
+  const handleSignUp = async () => {
+    if ( name || !email || !password) {
+      Alert.alert("Error", "All fields are required.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const response = await axios.get(
+        "http://192.168.0.62:8000/api/staffsignup",
+        {
+          params: {
+            name,
+            email,
+            password,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        Alert.alert("Success", "Registration successful!");
+        console.log("Redirecting to /Query");
+        router.push("/DisplayQueryStaff");
+      }
+    } catch (error: any) {
+      console.error("Signup error:", error.response?.data || error.message);
+      Alert.alert(
+        "Error",
+        error.response?.data?.message ||
+          "Something went wrong. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const navigateToLogin = () => {
     router.push("/DisplayQueryStaff");
   };
 
@@ -26,10 +63,10 @@ const SignupScreen: React.FC = () => {
 
       <TextInput
         style={styles.input}
-        placeholder="Username"
+        placeholder="name"
         placeholderTextColor="#aaa"
-        value={username}
-        onChangeText={setUsername}
+        value={name}
+        onChangeText={setname}
       />
       <TextInput
         style={styles.input}
@@ -49,7 +86,7 @@ const SignupScreen: React.FC = () => {
         secureTextEntry
       />
 
-      <TouchableOpacity style={styles.button} onPress={handleSignup}>
+      <TouchableOpacity style={styles.button} onPress={handleSignUp}>
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
 
@@ -85,11 +122,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   button: {
-<<<<<<< HEAD:app/signin.tsx
-    backgroundColor: '#2b0f73',
-=======
     backgroundColor: "#007BFF",
->>>>>>> origin/main:app/StaffSignUp.tsx
     padding: 15,
     borderRadius: 10,
     marginVertical: 20,
@@ -107,15 +140,14 @@ const styles = StyleSheet.create({
   },
   linkText: {
     fontSize: 16,
-<<<<<<< HEAD:app/signin.tsx
-    color: '#2b0f73',
-    fontWeight: 'bold',
-=======
     color: "#007BFF",
     fontWeight: "bold",
->>>>>>> origin/main:app/StaffSignUp.tsx
     marginTop: 5,
   },
 });
 
 export default SignupScreen;
+function setLoading(arg0: boolean) {
+  throw new Error("Function not implemented.");
+}
+

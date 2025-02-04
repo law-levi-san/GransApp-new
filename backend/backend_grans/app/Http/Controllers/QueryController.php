@@ -16,7 +16,7 @@ class QueryController extends Controller
 
     $validator = Validator::make($request->all(), [
         'problem_statement' => 'required|in:Technical Issue,Billing Issue,General Query',
-        'problem_description' => 'required|string|max:1000',
+        'description' => 'required|string|max:1000',
         'name' => 'required|string|max:255',
         'phone_number' => 'required|digits:10',
         'company_name' => 'required|string|max:255',
@@ -32,7 +32,7 @@ class QueryController extends Controller
 
     $query = Query::create([
         'problem_statement' => $request->problem_statement,
-        'problem_description' => $request->problem_description,
+        'description' => $request->description,
         'name' => $request->name,
         'phone_number' => $request->phone_number,
         'company_name' => $request->company_name,
@@ -42,6 +42,15 @@ class QueryController extends Controller
     return response()->json([
         'message' => 'Query submitted successfully!',
         'data' => $query, // Return the created query for better debugging
+    ]);
+}
+public function getQuery()
+{
+    $queries = Query::all();
+
+    return response()->json([
+        'message' => 'All queries fetched successfully!',
+        'data' => $queries,
     ]);
 }
 }
