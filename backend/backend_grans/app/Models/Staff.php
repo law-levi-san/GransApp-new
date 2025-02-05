@@ -13,16 +13,5 @@ class Staff extends Model
 
     protected $table = 'staff'; // Explicitly defining table name
     protected $fillable = ['name', 'email', 'password']; // Allow mass assignment
-=======
-
-class Staff extends Model
-{
-    use HasApiTokens, HasFactory, Notifiable;
-
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
->>>>>>> origin/maithrypappu
+    protected $hidden = ['password']; // Hide password from JSON response
 }

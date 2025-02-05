@@ -100,42 +100,6 @@ export default function SignUp(): JSX.Element {
   );
 }
   const router = useRouter();
-
-  const [name, setname] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const handleSignUp = async () => {
-
-    if ( name || !email || !password) {
-
-    if (!name || !email || !password) {
-
-      Alert.alert("Error", "All fields are required.");
-      return;
-    }
-
-    setLoading(true);
-
-    try {
-      const response = await axios.get(
-
-        "http://192.168.0.62:8000/api/staffsignup",
-
-    {
-          params: {
-            name,
-            email,
-            password,
-          },
-        }
-      );
-
-      if (response.status === 200) {
-        Alert.alert("Success", "Registration successful!");
-
-        console.log("Redirecting to /Query");
         console.log("Redirecting to /DisplayQueryStaff");
 
         router.push("/DisplayQueryStaff");

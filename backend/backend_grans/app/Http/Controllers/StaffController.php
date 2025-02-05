@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Validator;
 
 class StaffController extends Controller
 {
-    public function staffLogin(Request $request)
-    {
-        $request->validate([
+public function staffLogin(Request $request)
+{
+    $request->validate([
             'name' => 'required|string',
             'email' => 'required|email',
             'password' => 'required|min:6',
