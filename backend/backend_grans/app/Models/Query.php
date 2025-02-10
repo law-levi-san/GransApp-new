@@ -17,4 +17,5 @@ class Query extends Model
         'company_name',
         'email'
     ];
+    
 }

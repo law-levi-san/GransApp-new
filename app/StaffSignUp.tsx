@@ -30,7 +30,7 @@ export default function SignUp(): JSX.Element {
 
     try {
       const response = await axios.get(
-        "http://192.168.0.66:8000/api/staffsignup",
+        "http://192.168.0.62:8000/api/staffsignup",
         {
           params: {
             name,

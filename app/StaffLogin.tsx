@@ -19,7 +19,7 @@ export default function StaffLogin() {
   const handleLogin = async () => {
     try {
       const response = await axios.post(
-        "http://192.168.0.66:8000/api/stafflogin",
+        "http://192.168.0.62:8000/api/stafflogin",
         {
           email: email,
           password: password,

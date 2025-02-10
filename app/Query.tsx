@@ -14,7 +14,6 @@ import { useRouter } from "expo-router";
 
 export default function PostQuery() {
   const router = useRouter();
-  const [employeeId, setEmployeeId] = useState("");
   const [problemStatement, setProblemStatement] = useState("");
   const [description, setDescription] = useState("");
   const [name, setName] = useState("");
@@ -24,25 +23,18 @@ export default function PostQuery() {
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {
-    if (
-      !problemStatement ||
-      !description ||
-      !name ||
-      !phone ||
-      !companyName ||
-      !email
-    ) {
+    if (!problemStatement || !description || !name || !phone || !companyName || !email) {
       Alert.alert("Error", "All fields are required.");
       return;
     }
-
+  
     setLoading(true);
-
+  
     try {
-      const response = await axios.get(
-        "http://192.168.0.62:8000/api/postQuery",
-        {  // ✅ Send data directly in the request body
-          employee_id: employeeId,
+      const response = await axios.post(
+        "http://192.168.0.62:8000/api/postQuery", // ✅ Correct method (POST)
+        {  
+          
           problem_statement: problemStatement,
           description: description,
           company_name: companyName,
@@ -54,22 +46,19 @@ export default function PostQuery() {
           headers: { "Content-Type": "application/json" }, // ✅ Ensure correct headers
         }
       );
-
+  
       if (response.status === 200) {
-        Alert.alert("Success", "Registration successful!");
+        Alert.alert("Success", "Query submitted successfully!");
         router.push("/Query");
       }
     } catch (error: any) {
       console.error("Signup error:", error.response?.data || error.message);
-      Alert.alert(
-        "Error",
-        error.response?.data?.message ||
-          "Something went wrong. Please try again."
-      );
+      Alert.alert("Error", error.response?.data?.message || "Something went wrong.");
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <ScrollView contentContainerStyle={styles.container}>

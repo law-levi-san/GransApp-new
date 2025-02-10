@@ -19,7 +19,7 @@ export default function CustomerLogin() {
     try {
       const response = await axios.post(
 
-        "http://192.168.0.66:8000/api/emplogin",
+        "http://192.168.0.62:8000/api/emplogin",
         {
           email: email,
           password: password,
