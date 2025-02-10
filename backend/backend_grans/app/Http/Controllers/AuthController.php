@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -19,6 +20,9 @@ class AuthController extends Controller
     // Retrieve the user based on the email
     $user = Employee::where('email', $request->input('email'))->first();
 
+    $user_id = $user->id;
+    log::info('id: '. $user_id);
+
     if (!$user) {
         return response()->json([
             'message' => 'Email not found.'
@@ -30,6 +34,7 @@ class AuthController extends Controller
 
         return response()->json([
             'message' => 'Login successful',
+            'employeeId' => $user_id,  
             'token' => $token, // Pass the token in the response
         ], 200);
     } else {
@@ -63,6 +68,7 @@ class AuthController extends Controller
          // Handle the signup logic here
          return response()->json([
             'message' => 'Employee signed up successfully!',
+            'employee_id' => $user->id, 
             'data' => $request->all()
         ]);
 

@@ -11,8 +11,10 @@ use Illuminate\Http\Request;
 
 class QueryController extends Controller
 {
-    public function postQuery(Request $request)
+    public function postQuery(Request $request, $id)
 {
+    \Log::info('Received ID:'. $id);
+
 
     $validator = Validator::make($request->all(), [
         'problem_statement' => 'required|in:Technical Issue,Billing Issue,General Query',
@@ -31,6 +33,7 @@ class QueryController extends Controller
     }
 
     $user = Employee::find($id);
+    log::info('id: '. $id);
 
     $query = Query::create([
         'employee_id' => $user->id,

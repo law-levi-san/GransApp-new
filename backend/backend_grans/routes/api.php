@@ -26,7 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/emplogin', [AuthController::class, 'empLogin']);
 Route::get('/empsignup', [AuthController::class, 'empSignup']);
 
-Route::get('/postQuery', [QueryController::class, 'postQuery']);
+Route::get('/postQuery/${employeeId}', [QueryController::class, 'postQuery']);
 
 Route::post('/stafflogin', [StaffController::class, 'staffLogin']);
 Route::get('/staffsignup', [StaffController::class, 'staffSignup']);

@@ -29,7 +29,7 @@ export default function CustomerLogin() {
         Alert.alert("Success", "Login successful");
         const { token } = response.data;
         console.log("Auth Token:", token);
-        router.push("/DisplayQueryStaff"); // Navigate to Query page
+        router.push("/Query"); // Navigate to Query page
       }
     } catch (error: any) {
       if (error.response && error.response.status === 401) {

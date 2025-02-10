@@ -10,6 +10,7 @@ class Query extends Model
     use HasFactory;
 
     protected $fillable = [
+        'employee_id',
         'problem_statement',
         'problem_description',
         'name',
