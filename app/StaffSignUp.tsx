@@ -1,4 +1,7 @@
+import { useRouter } from "expo-router";
+import axios from "axios"
 import React, { useState } from "react";
+
 import {
   View,
   Text,
@@ -7,11 +10,11 @@ import {
   StyleSheet,
   Alert,
 } from "react-native";
-import { useRouter } from "expo-router";
-import axios from "axios";
 
-export default function SignUp() {
+
+export default function SignUp(): JSX.Element {
   const router = useRouter();
+
   const [name, setname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,7 +30,7 @@ export default function SignUp() {
 
     try {
       const response = await axios.get(
-        "http://192.168.9.239:8000/api/staffsignup",
+        "http://192.168.0.62:8000/api/staffsignup",
         {
           params: {
             name,
@@ -39,7 +42,6 @@ export default function SignUp() {
 
       if (response.status === 200) {
         Alert.alert("Success", "Registration successful!");
-        console.log("Redirecting to /DisplayQueryStaff");
         router.push("/DisplayQueryStaff");
       }
     } catch (error: any) {
@@ -64,7 +66,7 @@ export default function SignUp() {
 
       <TextInput
         style={styles.input}
-        placeholder="Username"
+        placeholder="name"
         placeholderTextColor="#aaa"
         value={name}
         onChangeText={setname}
@@ -92,12 +94,13 @@ export default function SignUp() {
       </TouchableOpacity>
 
       <Text style={styles.infoText}>If an account already exists,</Text>
-      <TouchableOpacity onPress={() => router.push("/StaffLogin")}>
+      <TouchableOpacity onPress={navigateToLogin}>
         <Text style={styles.linkText}>Login</Text>
       </TouchableOpacity>
     </View>
   );
 }
+ 
 
 const styles = StyleSheet.create({
   container: {
@@ -147,6 +150,4 @@ const styles = StyleSheet.create({
   },
 });
 
-function setLoading(arg0: boolean) {
-  throw new Error("Function not implemented.");
-}
+

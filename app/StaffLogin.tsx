@@ -1,6 +1,7 @@
 import axios from "axios";
-import { router, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
+
 import {
   View,
   Text,
@@ -18,7 +19,7 @@ export default function StaffLogin() {
   const handleLogin = async () => {
     try {
       const response = await axios.post(
-        "http://192.168.9.239:8000/api/emplogin",
+        "http://192.168.0.62:8000/api/stafflogin",
         {
           email: email,
           password: password,
@@ -29,7 +30,7 @@ export default function StaffLogin() {
         Alert.alert("Success", "Login successful");
         const { token } = response.data;
         console.log("Auth Token:", token);
-        router.push("/DisplayQueryStaff"); // Navigate to Query page
+        router.push("/DisplayQueryStaff"); // Navigate to DisplayQuery page
       }
     } catch (error: any) {
       if (error.response && error.response.status === 401) {
@@ -41,6 +42,7 @@ export default function StaffLogin() {
       }
     }
   };
+
 
   return (
     <View style={styles.container}>

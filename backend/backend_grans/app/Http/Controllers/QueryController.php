@@ -1,53 +1,79 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Query;
-use App\Models\Employee;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
-
-use Illuminate\Http\Request;
-
 class QueryController extends Controller
 {
-    public function postQuery(Request $request, $id)
+    public function store(Request $request, $id)
 {
     \Log::info('Received ID:'. $id);
 
 
-    $validator = Validator::make($request->all(), [
-        'problem_statement' => 'required|in:Technical Issue,Billing Issue,General Query',
-        'problem_description' => 'required|string|max:1000',
-        'name' => 'required|string|max:255',
-        'phone_number' => 'required|digits:10',
-        'company_name' => 'required|string|max:255',
-        'email' => 'required|email',
-    ]);
+        // Validate input data
+        $validator = Validator::make($request->all(), [
+           'problem_statement' => 'required|string|max:255',
+            'description' => 'required|string|max:1000',
+            'company_name' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:15',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+        ]);
 
-    if ($validator->fails()) {
-        return response()->json([
-            'success' => false,
-            'message' => $validator->errors(),
-        ], 400);
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Validation failed',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        try {
+            // Create a new query
+            $query = Query::create([
+                'problem_statement' => $request->problem_statement,
+                'description' => $request->description,
+                'company_name' => $request->company_name,
+                'phone_number' => $request->phone_number,
+                'name' => $request->name,
+                'email' => $request->email,
+            ]);
+
+            Log::info('Query successfully stored:', $query->toArray());
+
+            return response()->json([
+                'message' => 'Query submitted successfully!',
+                'query' => $query,
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error('Error storing query:', ['error' => $e->getMessage()]);
+
+            return response()->json([
+                'message' => 'Something went wrong while storing the query',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 
-    $user = Employee::find($id);
-    log::info('id: '. $id);
+    public function getQuery()
+    {
+        try {
+            $queries = Query::all();
 
-    $query = Query::create([
-        'employee_id' => $user->id,
-        'problem_statement' => $request->problem_statement,
-        'problem_description' => $request->problem_description,
-        'name' => $request->name,
-        'phone_number' => $request->phone_number,
-        'company_name' => $request->company_name,
-        'email' => $request->email,
-    ]);
+            return response()->json([
+                'message' => 'All queries fetched successfully!',
+                'data' => $queries,
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error('Error fetching queries:', ['error' => $e->getMessage()]);
 
-    return response()->json([
-        'message' => 'Query submitted successfully!',
-        'data' => $query, // Return the created query for better debugging
-    ]);
-}
+            return response()->json([
+                'message' => 'Something went wrong while fetching queries',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
 }

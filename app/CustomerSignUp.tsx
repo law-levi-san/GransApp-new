@@ -28,7 +28,8 @@ export default function SignUp() {
 
     try {
       const response = await axios.get(
-        "http://192.168.9.239:8000/api/empsignup",
+
+        "http://192.168.0.62:8000/api/empsignup",
         {
           params: {
             name,
@@ -148,6 +149,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
+
   infoText: {
     marginTop: 20,
     fontSize: 16,
@@ -156,7 +158,7 @@ const styles = StyleSheet.create({
   loginText: {
     marginTop: 5,
     fontSize: 16,
-    color: "#007AFF", // A more vibrant blue color for the link
+    color: "#2b0f73", // A more vibrant blue color for the link
     textDecorationLine: "underline",
     fontWeight: "500", // Slightly bolder text for emphasis
   },

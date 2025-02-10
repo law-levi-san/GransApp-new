@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens; 
 
 class Staff extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory, HasApiTokens;
 
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $table = 'staff'; // Explicitly defining table name
+    protected $fillable = ['name', 'email', 'password']; // Allow mass assignment
+    protected $hidden = ['password']; // Hide password from JSON response
 }
