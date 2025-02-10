@@ -9,35 +9,37 @@ use Illuminate\Support\Facades\Validator;
 
 class StaffController extends Controller
 {
-public function staffLogin(Request $request)
+    public function staffLogin(Request $request)
 {
     $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email',
-            'password' => 'required|min:6',
-        ]);
-    
-        $user = Staff::where('email', $request->input('email'))->first();
-    
-        if (!$user) {
-            return response()->json([
-                'message' => 'Email not found.'
-            ], 404);  // 404 means not found
-        }
-    
-        if ($user && Hash::check($request->input('password'), $user->password)) {
-            $token = $user->createToken('YourAppName')->plainTextToken;  // Using Laravel Sanctum for token generation
-    
-            return response()->json([
-                'message' => 'Login successful',
-                'token' => $token, // Pass the token in the response
-            ], 200);
-        } else {
-            return response()->json([
-                'message' => 'Invalid email or password',
-            ], 401); // 401 Unauthorized
-        }
+        'email' => 'required|email',
+        'password' => 'required|min:6',
+    ]);
+
+    $user = Staff::where('email', $request->email)->first();
+
+    if (!$user) {
+        return response()->json([
+            'message' => 'Email not found.',
+        ], 404);
     }
+
+    // ✅ Correct password checking
+    if (!Hash::check($request->password, $user->password)) {
+        return response()->json([
+            'message' => 'Invalid email or password.',
+        ], 401);
+    }
+
+    // Generate authentication token (Sanctum required)
+    $token = $user->createToken('YourAppName')->plainTextToken;
+
+    return response()->json([
+        'message' => 'Login successful',
+        'token' => $token,
+    ], 200);
+}
+
     
         public function staffSignup(Request $request){
             $validator = Validator::make($request->all(),[
@@ -53,10 +55,17 @@ public function staffLogin(Request $request)
                 ],400);
             }
     
-             $user = Staff::create([
+            //$users = Staff::all();
+            //foreach ($users as $user) {
+                //if (!Hash::needsRehash($user->password)) { // Avoid rehashing already hashed passwords
+                  //  $user->password = Hash::make($user->password);
+                //    $user->save();
+              //  }
+            //}
+            $user = Staff::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => ($request->password),
+                'password' => Hash::make($request->password),
              ]);
     
              return response()->json([

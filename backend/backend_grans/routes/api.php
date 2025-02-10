@@ -13,12 +13,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // Auth Routes
 Route::post('/emplogin', [AuthController::class, 'empLogin']);
-Route::post('/empsignup', [AuthController::class, 'empSignup']); // Should be POST instead of GET if it's user registration
+Route::get('/empsignup', [AuthController::class, 'empSignup']); // Should be POST instead of GET if it's user registration
 
 // Query Routes
 Route::post('/query', [QueryController::class, 'postQuery']); // Use '/query' to follow REST API best practices
 Route::get('/query', [QueryController::class, 'getQuery']); 
 
 // Staff Routes
-Route::post('/staff/login', [StaffController::class, 'staffLogin']);
-Route::post('/staff/signup', [StaffController::class, 'staffSignup']); // Should be POST if it's user registration
+Route::post('/stafflogin', [StaffController::class, 'staffLogin']);
+Route::get('/staffsignup', [StaffController::class, 'staffSignup']); // Should be POST if it's user registration

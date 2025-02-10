@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-<<<<<<< HEAD
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens; 
 
 class Staff extends Model
 {

@@ -41,16 +41,17 @@ export default function PostQuery() {
     try {
       const response = await axios.get(
         "http://192.168.0.62:8000/api/postQuery",
-         {
-          params: {
-            employee_id: employeeId,
-            problem_statement: problemStatement,
-            description: description,
-            company_name: companyName,
-            phone_number: phone,
-            name: name,
-            email: email,
-          },
+        {  // ✅ Send data directly in the request body
+          employee_id: employeeId,
+          problem_statement: problemStatement,
+          description: description,
+          company_name: companyName,
+          phone_number: phone,
+          name: name,
+          email: email,
+        },
+        {
+          headers: { "Content-Type": "application/json" }, // ✅ Ensure correct headers
         }
       );
 

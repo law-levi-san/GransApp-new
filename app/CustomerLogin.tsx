@@ -19,7 +19,7 @@ export default function CustomerLogin() {
     try {
       const response = await axios.post(
 
-        "http://192.168.9.239:8000/api/emplogin",
+        "http://192.168.0.66:8000/api/emplogin",
         {
           email: email,
           password: password,
@@ -30,7 +30,7 @@ export default function CustomerLogin() {
         Alert.alert("Success", "Login successful");
         const { token } = response.data;
         console.log("Auth Token:", token);
-        router.push("/DisplayQueryStaff"); // Navigate to Query page
+        router.push("/Query"); // Navigate to Query page
       }
     } catch (error: any) {
       if (error.response && error.response.status === 401) {

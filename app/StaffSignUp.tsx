@@ -1,4 +1,7 @@
+import { useRouter } from "expo-router";
+import axios from "axios"
 import React, { useState } from "react";
+
 import {
   View,
   Text,
@@ -7,8 +10,6 @@ import {
   StyleSheet,
   Alert,
 } from "react-native";
-import { useRouter } from "expo-router";
-import axios from "axios";
 
 
 export default function SignUp(): JSX.Element {
@@ -29,7 +30,7 @@ export default function SignUp(): JSX.Element {
 
     try {
       const response = await axios.get(
-        "http://192.168.0.62:8000/api/staffsignup",
+        "http://192.168.0.66:8000/api/staffsignup",
         {
           params: {
             name,
@@ -99,71 +100,7 @@ export default function SignUp(): JSX.Element {
     </View>
   );
 }
-  const router = useRouter();
-        console.log("Redirecting to /DisplayQueryStaff");
-
-        router.push("/DisplayQueryStaff");
-      }
-    } catch (error: any) {
-      console.error("Signup error:", error.response?.data || error.message);
-      Alert.alert(
-        "Error",
-        error.response?.data?.message ||
-          "Something went wrong. Please try again."
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const navigateToLogin = () => {
-
-    router.push("/DisplayQueryStaff");
-
-    router.push("/StaffLogin");
-
-  };
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Sign Up</Text>
-
-      <TextInput
-        style={styles.input}
-        placeholder="name"
-        placeholderTextColor="#aaa"
-        value={name}
-        onChangeText={setname}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Email ID"
-        placeholderTextColor="#aaa"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-        autoCapitalize="none"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        placeholderTextColor="#aaa"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-
-      <TouchableOpacity style={styles.button} onPress={handleSignUp}>
-        <Text style={styles.buttonText}>Sign Up</Text>
-      </TouchableOpacity>
-
-      <Text style={styles.infoText}>If an account already exists,</Text>
-      <TouchableOpacity onPress={() => router.push("/StaffLogin")}>
-        <Text style={styles.linkText}>Login</Text>
-      </TouchableOpacity>
-    </View>
-  );
-}
+ 
 
 const styles = StyleSheet.create({
   container: {

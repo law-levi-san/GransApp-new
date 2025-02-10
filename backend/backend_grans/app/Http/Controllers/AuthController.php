@@ -57,7 +57,7 @@ class AuthController extends Controller
          $user = Employee::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => ($request->password),
+            'password' => Hash::make($request->password),
          ]);
 
          // Handle the signup logic here
