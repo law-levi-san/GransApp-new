@@ -4,7 +4,8 @@ import axios from "axios";
 import { useRouter } from "expo-router";
 
 export default function Staff() {
-  const [queries, setQueries] = useState<string>("Loading...");
+  const [queries, setQueries] = useState<any[]>([]);
+  const [selectedQueries, setSelectedQueries] = useState<{ [key: string]: boolean }>({});
 
   useEffect(() => {
     fetchQueries();
@@ -18,7 +19,15 @@ export default function Staff() {
       setQueries(response.data);
     } catch (error) {
       console.error("Error fetching queries:", error);
-      setQueries("Failed to load queries.");
+      
+      console.log("API Response:", response.data); // Log the response
+  
+      if (Array.isArray(response.data)) {
+        setQueries(response.data); // Set the queries if response is an array
+      } else {
+        console.error("Expected an array but got:", response.data);
+        setQueries([]); // Set an empty array to prevent errors
+      }
     }
   };
 
