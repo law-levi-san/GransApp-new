@@ -5,7 +5,9 @@ import { useRouter } from "expo-router";
 
 export default function Staff() {
   const [queries, setQueries] = useState<any[]>([]);
-  const [selectedQueries, setSelectedQueries] = useState<{ [key: string]: boolean }>({});
+  const [selectedQueries, setSelectedQueries] = useState<{
+    [key: string]: boolean;
+  }>({});
 
   useEffect(() => {
     fetchQueries();
@@ -20,15 +22,13 @@ export default function Staff() {
         }
       );
       setQueries(response.data);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error fetching queries:", error);
-      
-      console.log("API Response:", response.data); // Log the response
-  
-      if (Array.isArray(response.data)) {
-        setQueries(response.data); // Set the queries if response is an array
+
+      if (error.response && Array.isArray(error.response.data)) {
+        setQueries(error.response.data); // Optional fallback
       } else {
-        console.error("Expected an array but got:", response.data);
+        console.error("Expected an array but got:", error.response?.data);
         setQueries([]); // Set an empty array to prevent errors
       }
     }
