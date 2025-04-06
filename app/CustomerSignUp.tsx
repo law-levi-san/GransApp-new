@@ -13,6 +13,7 @@ import axios from "axios";
 
 export default function SignUp() {
   const router = useRouter();
+  const [id, setId] = useState("");
   const [name, setname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,10 +29,10 @@ export default function SignUp() {
 
     try {
       const response = await axios.get(
-
-        "http://192.168.0.62:8000/api/empsignup",
+        "http://192.168.70.239:8000/api/empsignup",
         {
           params: {
+            id,
             name,
             email,
             password,
@@ -63,6 +64,13 @@ export default function SignUp() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Sign Up</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="id"
+        value={id}
+        onChangeText={setId}
+        placeholderTextColor="#aaa"
+      />
       <TextInput
         style={styles.input}
         placeholder="name"
@@ -104,6 +112,7 @@ export default function SignUp() {
       </TouchableOpacity>
     </View>
   );
+  console.log("hello wasup");
 }
 
 const styles = StyleSheet.create({
@@ -112,7 +121,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
-    backgroundColor: "#f7f9fc", // Light background color
+    backgroundColor: "#f7f9fc",
   },
   title: {
     fontSize: 36,

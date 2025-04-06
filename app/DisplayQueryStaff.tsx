@@ -12,9 +12,12 @@ export default function Staff() {
 
   const fetchQueries = async () => {
     try {
-      const response = await axios.get("http://192.168.0.62:8000/api/displayquerystaff", {
-        headers: { "Content-Type": "text/plain" }, // Ensure plain text format
-      });
+      const response = await axios.get(
+        "http://192.168.70.239:8000/api/displayquerystaff",
+        {
+          headers: { "Content-Type": "text/plain" }, // Ensure plain text format
+        }
+      );
       setQueries(response.data);
     } catch (error) {
       console.error("Error fetching queries:", error);
@@ -65,4 +68,3 @@ const styles = StyleSheet.create({
     color: "#2c3e50",
   },
 });
-

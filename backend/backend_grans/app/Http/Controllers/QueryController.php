@@ -11,13 +11,16 @@ class QueryController extends Controller
 {
     public function store(Request $request, $id)
 {
-    \Log::info('Received ID:'. $id);
 
+    \Log::info('Full request:', $request->all());
+
+    $employee_id = $id;
+    \Log::info('Received ID:'. $employee_id);
 
         // Validate input data
         $validator = Validator::make($request->all(), [
            'problem_statement' => 'required|string|max:255',
-            'description' => 'required|string|max:1000',
+            'problem_description' => 'required|string|max:1000',
             'company_name' => 'required|string|max:255',
             'phone_number' => 'required|string|max:15',
             'name' => 'required|string|max:255',
@@ -31,11 +34,14 @@ class QueryController extends Controller
             ], 422);
         }
 
+        $problemDescription = $request->problem_description ?? 'No description provided';
+
         try {
             // Create a new query
             $query = Query::create([
+                'employee_id' => $employee_id,
                 'problem_statement' => $request->problem_statement,
-                'description' => $request->description,
+                'problem_description' => $problemDescription,
                 'company_name' => $request->company_name,
                 'phone_number' => $request->phone_number,
                 'name' => $request->name,

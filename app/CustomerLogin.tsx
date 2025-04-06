@@ -12,14 +12,14 @@ import axios from "axios";
 
 export default function CustomerLogin() {
   const router = useRouter();
+  const [id, setId] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
     try {
       const response = await axios.post(
-
-        "http://192.168.0.62:8000/api/emplogin",
+        "http://192.168.70.239:8000/api/emplogin",
         {
           email: email,
           password: password,
@@ -46,6 +46,13 @@ export default function CustomerLogin() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Customer Portal</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Id"
+        value={id}
+        onChangeText={setId}
+        placeholderTextColor="#aaa"
+      />
       <TextInput
         style={styles.input}
         placeholder="Email"

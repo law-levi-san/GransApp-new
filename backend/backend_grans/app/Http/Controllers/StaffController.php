@@ -24,7 +24,6 @@ class StaffController extends Controller
         ], 404);
     }
 
-    // ✅ Correct password checking
     if (!Hash::check($request->password, $user->password)) {
         return response()->json([
             'message' => 'Invalid email or password.',
@@ -55,13 +54,6 @@ class StaffController extends Controller
                 ],400);
             }
     
-            //$users = Staff::all();
-            //foreach ($users as $user) {
-                //if (!Hash::needsRehash($user->password)) { // Avoid rehashing already hashed passwords
-                  //  $user->password = Hash::make($user->password);
-                //    $user->save();
-              //  }
-            //}
             $user = Staff::create([
                 'name' => $request->name,
                 'email' => $request->email,

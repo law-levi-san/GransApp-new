@@ -12,7 +12,7 @@ class Query extends Model
     protected $fillable = [
         'employee_id',
         'problem_statement',
-        'description',
+        'problem_description',
         'name',
         'phone_number',
         'company_name',

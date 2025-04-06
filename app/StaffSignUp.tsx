@@ -1,5 +1,5 @@
 import { useRouter } from "expo-router";
-import axios from "axios"
+import axios from "axios";
 import React, { useState } from "react";
 
 import {
@@ -10,7 +10,6 @@ import {
   StyleSheet,
   Alert,
 } from "react-native";
-
 
 export default function SignUp(): JSX.Element {
   const router = useRouter();
@@ -30,7 +29,7 @@ export default function SignUp(): JSX.Element {
 
     try {
       const response = await axios.get(
-        "http://192.168.0.62:8000/api/staffsignup",
+        "http://192.168.70.239:8000/api/staffsignup",
         {
           params: {
             name,
@@ -100,7 +99,6 @@ export default function SignUp(): JSX.Element {
     </View>
   );
 }
- 
 
 const styles = StyleSheet.create({
   container: {
@@ -149,5 +147,3 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
 });
-
-

@@ -14,6 +14,7 @@ import { useRouter } from "expo-router";
 
 export default function PostQuery() {
   const router = useRouter();
+  const [id, setId] = useState("");
   const [problemStatement, setProblemStatement] = useState("");
   const [description, setDescription] = useState("");
   const [name, setName] = useState("");
@@ -38,17 +39,15 @@ export default function PostQuery() {
     setLoading(true);
 
     try {
-      const response = await axios.get(
-        `http://192.168.9.239:8000/api/postQuery`, // Use template literal to insert employeeId
+      const response = await axios.post(
+        `http://192.168.70.239:8000/api/postQuery/${id}`,
         {
-          params: {
-            problem_statement: problemStatement,
-            problem_description: description,
-            company_name: companyName,
-            phone_number: phone,
-            name: name,
-            email: email,
-          },
+          problem_statement: problemStatement,
+          problem_description: description,
+          company_name: companyName,
+          phone_number: phone,
+          name: name,
+          email: email,
         }
       );
 
@@ -84,6 +83,14 @@ export default function PostQuery() {
           <Picker.Item label="General Query" value="General Query" />
         </Picker>
       </View>
+
+      <Text style={styles.label}>Id</Text>
+      <TextInput
+        style={styles.input}
+        value={id}
+        onChangeText={setId}
+        placeholderTextColor="#aaa"
+      />
 
       <Text style={styles.label}>Problem Description (max 150 words)</Text>
       <TextInput

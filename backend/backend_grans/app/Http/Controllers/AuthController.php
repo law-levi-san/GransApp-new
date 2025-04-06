@@ -11,13 +11,11 @@ class AuthController extends Controller
 {
     public function empLogin(Request $request)
 {
-    // Validate email and password inputs
     $request->validate([
         'email' => 'required|email',
         'password' => 'required|min:6',
     ]);
 
-    // Retrieve the user based on the email
     $user = Employee::where('email', $request->input('email'))->first();
 
     $user_id = $user->id;
@@ -26,22 +24,21 @@ class AuthController extends Controller
     if (!$user) {
         return response()->json([
             'message' => 'Email not found.'
-        ], 404);  // 404 means not found
+        ], 404);  
     }
 
     if ($user && Hash::check($request->input('password'), $user->password)) {
-        $token = $user->createToken('YourAppName')->plainTextToken;  // Using Laravel Sanctum for token generation
+        $token = $user->createToken('YourAppName')->plainTextToken; 
 
         return response()->json([
             'message' => 'Login successful',
             'employeeId' => $user_id,  
-            'token' => $token, // Pass the token in the response
+            'token' => $token, 
         ], 200);
     } else {
-        // Invalid credentials
         return response()->json([
             'message' => 'Invalid email or password',
-        ], 401); // 401 Unauthorized
+        ], 401);
     }
 }
 
