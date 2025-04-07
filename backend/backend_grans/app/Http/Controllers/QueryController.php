@@ -6,6 +6,8 @@ use App\Models\Query;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\QuerySubmitted;
 
 class QueryController extends Controller
 {
@@ -47,6 +49,8 @@ class QueryController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
             ]);
+
+            Mail::to('pappumaithry@gmail.com')->send(new QuerySubmitted($query));
 
             Log::info('Query successfully stored:', $query->toArray());
 

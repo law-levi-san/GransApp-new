@@ -18,7 +18,7 @@ export default function Staff() {
       const response = await axios.get(
         "http://192.168.70.239:8000/api/displayquerystaff",
         {
-          headers: { "Content-Type": "text/plain" }, // Ensure plain text format
+          headers: { "Content-Type": "text/plain" },
         }
       );
       setQueries(response.data);
@@ -26,10 +26,10 @@ export default function Staff() {
       console.error("Error fetching queries:", error);
 
       if (error.response && Array.isArray(error.response.data)) {
-        setQueries(error.response.data); // Optional fallback
+        setQueries(error.response.data);
       } else {
         console.error("Expected an array but got:", error.response?.data);
-        setQueries([]); // Set an empty array to prevent errors
+        setQueries([]);
       }
     }
   };
