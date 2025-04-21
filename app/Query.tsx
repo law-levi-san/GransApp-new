@@ -11,6 +11,7 @@ import {
 import { Picker } from "@react-native-picker/picker";
 import axios from "axios";
 import { useRouter } from "expo-router";
+import BASE_URL from "../.expo/src/config";
 
 export default function PostQuery() {
   const router = useRouter();
@@ -39,17 +40,14 @@ export default function PostQuery() {
     setLoading(true);
 
     try {
-      const response = await axios.post(
-        `http://192.168.70.239:8000/api/postQuery/${id}`,
-        {
-          problem_statement: problemStatement,
-          problem_description: description,
-          company_name: companyName,
-          phone_number: phone,
-          name: name,
-          email: email,
-        }
-      );
+      const response = await axios.post(`${BASE_URL}/api/postQuery/${id}`, {
+        problem_statement: problemStatement,
+        problem_description: description,
+        company_name: companyName,
+        phone_number: phone,
+        name: name,
+        email: email,
+      });
 
       if (response.status === 200) {
         Alert.alert("Success", "Query submitted successfully!");

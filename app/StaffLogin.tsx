@@ -10,6 +10,7 @@ import {
   StyleSheet,
   Alert,
 } from "react-native";
+import BASE_URL from "../.expo/src/config";
 
 export default function StaffLogin() {
   const router = useRouter();
@@ -18,13 +19,10 @@ export default function StaffLogin() {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post(
-        "http://192.168.70.239:8000/api/stafflogin",
-        {
-          email: email,
-          password: password,
-        }
-      );
+      const response = await axios.post(`${BASE_URL}/api/stafflogin`, {
+        email: email,
+        password: password,
+      });
 
       if (response.status === 200) {
         Alert.alert("Success", "Login successful");

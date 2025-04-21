@@ -86,4 +86,17 @@ class QueryController extends Controller
             ], 500);
         }
     }
+
+    public function displayQueryStaff()
+    {
+        $queries = Query::with('AssignCall')->get();
+
+        $queries = $queries->map(function ($query) {
+            $query->has_assigned_call = $query->assignCall !== null;
+            return $query;
+        });
+
+        return response()->json($queries);
+    }
+
 }

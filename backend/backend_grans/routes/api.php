@@ -6,6 +6,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\QueryController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\QueryDisplayController;
+use App\Http\Controllers\AssignCallController;
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -21,3 +23,9 @@ Route::post('/stafflogin', [StaffController::class, 'staffLogin']);
 Route::get('/staffsignup', [StaffController::class, 'staffSignup']); 
 
 Route::get('/displayquerystaff', [QueryDisplayController::class, 'displayQueries']); 
+
+
+Route::get('/assign-calls', [AssignCallController::class, 'index']);
+Route::post('/assign-calls', [AssignCallController::class, 'store']);
+Route::get('/assign-calls/query/{queryId}', [AssignCallController::class, 'showByQueryId']);
+

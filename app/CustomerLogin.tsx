@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import axios from "axios";
+import BASE_URL from "../.expo/src/config";
 
 export default function CustomerLogin() {
   const router = useRouter();
@@ -18,13 +19,10 @@ export default function CustomerLogin() {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post(
-        "http://192.168.70.239:8000/api/emplogin",
-        {
-          email: email,
-          password: password,
-        }
-      );
+      const response = await axios.post(`${BASE_URL}/api/emplogin`, {
+        email: email,
+        password: password,
+      });
 
       if (response.status === 200) {
         Alert.alert("Success", "Login successful");

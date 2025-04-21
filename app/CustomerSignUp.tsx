@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import axios from "axios";
+import BASE_URL from "../.expo/src/config";
 
 export default function SignUp() {
   const router = useRouter();
@@ -28,17 +29,14 @@ export default function SignUp() {
     setLoading(true);
 
     try {
-      const response = await axios.get(
-        "http://192.168.70.239:8000/api/empsignup",
-        {
-          params: {
-            id,
-            name,
-            email,
-            password,
-          },
-        }
-      );
+      const response = await axios.get(`${BASE_URL}/api/empsignup`, {
+        params: {
+          id,
+          name,
+          email,
+          password,
+        },
+      });
 
       if (response.status === 200) {
         Alert.alert("Success", "Registration successful!");
