@@ -99,4 +99,14 @@ class QueryController extends Controller
         return response()->json($queries);
     }
 
+
+    //to be sent to super admin for approval of the query
+    public function getAllQueriesAndAssignedEngineers()
+{
+    $queries = Query::with('assignCalls')->get();
+
+    return response()->json($queries);
+}
+
+
 }

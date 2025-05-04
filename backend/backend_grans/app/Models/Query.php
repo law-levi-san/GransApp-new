@@ -19,4 +19,10 @@ class Query extends Model
         'email'
     ];
     
+    public function assignCalls()
+    {
+        return $this->hasMany(AssignCall::class, 'query_id');
+    }
+    
+
 }
