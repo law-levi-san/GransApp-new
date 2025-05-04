@@ -22,6 +22,14 @@ const HomeScreen: React.FC = () => {
       >
         <Text style={styles.buttonText}>Staff Login</Text>
       </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => router.push("/SuperAdminSignup")}
+      >
+        <Text style={styles.buttonText}>Super Admin Login</Text>
+      </TouchableOpacity>
+
     </View>
   );
 };
