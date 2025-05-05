@@ -18,14 +18,15 @@ Route::get('/empsignup', [AuthController::class, 'empSignup']);
 
 Route::post('/postQuery/{id}', [QueryController::class, 'store']); 
 Route::get('/query', [QueryController::class, 'getQuery']); 
+Route::get("/getAllQueriesAndAssignedEngineers",[QueryController::class, 'getAllQueriesAndAssignedEngineers']);
 
 Route::post('/stafflogin', [StaffController::class, 'staffLogin']);
 Route::get('/staffsignup', [StaffController::class, 'staffSignup']); 
 
-Route::get('/displayquerystaff', [QueryDisplayController::class, 'displayQueries']); 
+Route::get('/displayquerystaff', [QueryDisplayController::class, 'displayQueries']);
 
+Route::post("/superAdminLogin", [SuperAdminController::class, 'superAdminLogin']);
 
-Route::get('/assign-calls', [AssignCallController::class, 'index']);
 Route::post('/assign-calls', [AssignCallController::class, 'store']);
 Route::get('/assign-calls/query/{queryId}', [AssignCallController::class, 'showByQueryId']);
 
