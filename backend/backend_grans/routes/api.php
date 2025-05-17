@@ -7,6 +7,8 @@ use App\Http\Controllers\QueryController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\QueryDisplayController;
 use App\Http\Controllers\AssignCallController;
+use App\Http\Controllers\EngineerController;
+
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -30,3 +32,6 @@ Route::post("/superAdminLogin", [SuperAdminController::class, 'superAdminLogin']
 Route::post('/assign-calls', [AssignCallController::class, 'store']);
 Route::get('/assign-calls/query/{queryId}', [AssignCallController::class, 'showByQueryId']);
 
+Route::post('/addEngineer', [EngineerController::class, 'addEngineer']);
+Route::get('/getAllEngineers', [EngineerController::class, 'getAllEngineers']);
+Route::put('/editEngineer/{id}', [EngineerController::class, 'editEngineer']);

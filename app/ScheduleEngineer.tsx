@@ -37,7 +37,6 @@ export default function ScheduleEngineer() {
     try {
       await axios.post(`${BASE_URL}/api/assign-calls`, {
         query_id: queryId,
-        assigned_engineer: selectedEngineer,
         scheduled_date: formattedDate,
         scheduled_time: formattedTime,
       });

@@ -15,7 +15,6 @@ class AssignCallController extends Controller
     try {
         $validated = $request->validate([
             'query_id' => 'required|exists:queries,id',
-            'assigned_engineer' => 'required|in:Engineer 1,Engineer 2,Engineer 3',
             'scheduled_date' => 'required|date',
             'scheduled_time' => 'required|date_format:H:i:s',
         ]);
@@ -48,5 +47,7 @@ class AssignCallController extends Controller
 
         return response()->json($assignCall);
     }
+
+    
 
 }

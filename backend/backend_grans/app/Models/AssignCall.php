@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Query;
+use App\Models\Engineers;
+
 
 class AssignCall extends Model
 {
@@ -12,7 +14,6 @@ class AssignCall extends Model
 
     protected $fillable = [
         'query_id',
-        'assigned_engineer',
         'scheduled_date',
         'scheduled_time',
     ];
@@ -20,5 +21,9 @@ class AssignCall extends Model
     public function queryRelation()
     {
         return $this->belongsTo(Query::class);
+    }
+
+    public function engineerRelation(){
+        return $this->belongsTo(Engineers::class);
     }
 }
